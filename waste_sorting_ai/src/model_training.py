@@ -156,13 +156,23 @@ def main():
     print(f"Loaded {len(X)} images")
     print(f"Recyclable: {np.sum(y)}, Non-recyclable: {len(y) - np.sum(y)}")
     
-    # Split data
-    X_train, X_temp, y_train, y_temp = train_test_split(
-        X, y, test_size=0.3, random_state=42, stratify=y
-    )
-    X_val, X_test, y_val, y_test = train_test_split(
-        X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp
-    )
+    # Split data - handle small datasets gracefully
+    min_class_size = np.min(np.bincount(y))
+    
+    if min_class_size < 3:
+        print("Very small dataset. Using simple 80/20 split without stratification.")
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.2, random_state=42, shuffle=True
+        )
+        X_val, y_val = X_test, y_test  # Use test set as validation
+    else:
+        print("Using stratified train/validation/test split.")
+        X_train, X_temp, y_train, y_temp = train_test_split(
+            X, y, test_size=0.4, random_state=42, stratify=y
+        )
+        X_val, X_test, y_val, y_test = train_test_split(
+            X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp
+        )
     
     print(f"Training set: {len(X_train)}")
     print(f"Validation set: {len(X_val)}")

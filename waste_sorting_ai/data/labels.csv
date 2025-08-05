@@ -1,3 +1,11 @@
 filename,category,recyclable,location,notes
 bottle.jpg,plastic_bottle,true,kitchen,clear plastic bottle
 banana_peel.jpg,organic,false,kitchen,banana peel organic waste
+bottle_1.jpg,plastic_bottle,true,kitchen,plastic water bottle
+bottle_2.jpg,plastic_bottle,true,kitchen,soda bottle
+bottle_3.jpg,plastic_bottle,true,kitchen,juice bottle
+bottle_4.jpg,plastic_bottle,true,kitchen,milk bottle
+organic_1.jpg,organic,false,kitchen,food scraps
+organic_2.jpg,organic,false,kitchen,vegetable peels
+organic_3.jpg,organic,false,kitchen,fruit waste
+organic_4.jpg,organic,false,kitchen,coffee grounds
