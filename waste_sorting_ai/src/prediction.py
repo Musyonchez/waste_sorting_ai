@@ -3,6 +3,7 @@
 Prediction module for waste classification
 """
 
+import os
 import numpy as np
 import cv2
 from PIL import Image
@@ -11,6 +12,12 @@ from pathlib import Path
 
 class WastePredictor:
     def __init__(self, model_path='models/waste_classifier.h5'):
+        # Handle relative path from src/ directory
+        if not os.path.isabs(model_path) and not os.path.exists(model_path):
+            model_path = os.path.join('..', model_path)
+        if not os.path.exists(model_path):
+            model_path = os.path.join(os.path.dirname(__file__), '..', model_path)
+        
         self.model_path = model_path
         self.model = None
         self.load_model()
